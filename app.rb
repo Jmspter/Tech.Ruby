@@ -1,43 +1,42 @@
 require 'sinatra'
 require 'rss'
-require 'net/http' # Adicione esta linha
+require 'net/http'
+
+FEEDS = {
+  'G1' => 'https://g1.globo.com/rss/g1/tecnologia/',
+  'NoticiasAoMinuto' => 'https://www.noticiasaominuto.com.br/rss/tech',
+  'FolhaDeSãoPaulo' => 'https://feeds.folha.uol.com.br/tec/rss091.xml'
+}.freeze
 
 get '/' do
-  # URLs dos feeds RSS que você quer agregar
-  feeds = [
-    'http://feeds.bbci.co.uk/news/rss.xml',
-    'https://g1.globo.com/rss/g1/',
-    'https://www.tecmundo.com.br/feed'
-  ]
+  @fonte = params['fonte']
+  @categoria = params['categoria']
 
   @noticias = []
 
-  feeds.each do |feed_url|
-    begin
-      # Faz a requisição HTTP
-      uri = URI.parse(feed_url)
-      response = Net::HTTP.get_response(uri)
+  FEEDS.each do |fonte, feed_url|
+    next if @fonte && fonte.downcase != @fonte.downcase
 
-      if response.code == "200" # Verifica se a requisição foi bem-sucedida
-        rss = RSS::Parser.parse(response.body, false)
-        rss.items.each do |item|
-          @noticias << {
-            titulo: item.title,
-            link: item.link,
-            descricao: item.description,
-            data: item.pubDate
-          }
-        end
-      else
-        puts "Erro ao acessar o feed: #{feed_url} (Código: #{response.code})"
+    uri = URI.parse(feed_url)
+    response = Net::HTTP.get_response(uri)
+
+    if response.is_a?(Net::HTTPSuccess)
+      rss = RSS::Parser.parse(response.body, false)
+      rss.items.each do |item|
+        next if @categoria && !item.categories.any? { |cat| cat.content.downcase.include?(@categoria.downcase) }
+
+        @noticias << {
+          fonte: fonte,
+          titulo: item.title,
+          link: item.link,
+          descricao: item.description,
+          data: item.pubDate,
+          categorias: item.categories.map(&:content)
+        }
       end
-    rescue StandardError => e
-      puts "Erro ao acessar o feed: #{feed_url}"
-      puts e.message
     end
   end
 
-  # Ordena as notícias por data (mais recentes primeiro)
   @noticias.sort_by! { |noticia| noticia[:data] }.reverse!
 
   erb :index
