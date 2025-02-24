@@ -18,7 +18,7 @@ Siga os passos abaixo para rodar o projeto em seu ambiente local:
 1. **Clone o repositório**
 
     ```bash
-    git clone https://github.com/seuusuario/nome-do-projeto.git
+    git clone https://github.com/Jmspter/Tech.Ruby.git
     ```
 
 2. **Instale as dependências**
