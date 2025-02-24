@@ -1,6 +1,7 @@
 # Tech Ruby
 
-Um feed de noticias sobre tecnologia de diferentes fontes
+Um feed de noticias sobre tecnologia de diferentes fontes com a opção de favoritar um artigo.
+
 ![alt text](public/image.png)
 
 ## Tecnologias Utilizadas
