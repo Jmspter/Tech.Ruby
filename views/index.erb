@@ -1,27 +1,29 @@
-<form action="/" method="get">
-  <label for="fonte">Filtrar por Fonte:</label>
-  <select name="fonte" id="fonte">
+<form action="/" method="get" class="mb-6 p-4 bg-gray-100 rounded-lg shadow">
+  <label for="fonte" class="block text-lg font-semibold mb-2">Filtrar por Fonte:</label>
+  <select name="fonte" id="fonte" class="w-full p-2 border border-gray-300 rounded">
     <option value="">Todas</option>
     <%= options_for_select(FEEDS.keys, @fonte) %>
   </select>
-
-  <button type="submit">Filtrar</button>
+  <button type="submit" class="mt-3 w-full bg-red-700 text-white py-2 px-4 rounded hover:bg-red-800">Filtrar</button>
 </form>
 
-<% @noticias.each do |noticia| %>
-  <li>
-    <h2><a href="<%= noticia[:link] %>"><%= noticia[:titulo] %></a></h2>
-    <p><%= noticia[:descricao] %></p>
-    <small>
-      Fonte: <%= noticia[:fonte] %> |
-      Data: <%= noticia[:data] %> 
-    </small>
-    <% if usuario_logado? %>
-      <form action="/favoritar" method="post">
-        <input type="hidden" name="titulo" value="<%= noticia[:titulo] %>">
-        <input type="hidden" name="link" value="<%= noticia[:link] %>">
-        <button type="submit">Favoritar</button>
-      </form>
-    <% end %>
-  </li>
-<% end %>
+<ul class="space-y-6">
+  <% @noticias.each do |noticia| %>
+    <li class="p-6 bg-white rounded-lg shadow">
+      <h2 class="text-xl font-bold text-blue-600 hover:underline">
+        <a href="<%= noticia[:link] %>"><%= noticia[:titulo] %></a>
+      </h2>
+      <p class="text-gray-700 mt-2"><%= noticia[:descricao] %></p>
+      <small class="text-gray-500 block mt-2">
+        Fonte: <%= noticia[:fonte] %> | Data: <%= noticia[:data] %>
+      </small>
+      <% if usuario_logado? %>
+        <form action="/favoritar" method="post" class="mt-4">
+          <input type="hidden" name="titulo" value="<%= noticia[:titulo] %>">
+          <input type="hidden" name="link" value="<%= noticia[:link] %>">
+          <button type="submit" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">Favoritar</button>
+        </form>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

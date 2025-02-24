@@ -1,8 +1,13 @@
-<h2>Notícias Favoritas</h2>
-<ul>
-  <% @favoritas.each do |favorita| %>
-    <li>
-      <h3><a href="<%= favorita['link'] %>"><%= favorita['titulo'] %></a></h3>
-    </li>
-  <% end %>
-</ul>
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Notícias Favoritas</h2>
+
+  <ul class="space-y-4">
+    <% @favoritas.each do |favorita| %>
+      <li class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+        <h3 class="text-xl font-semibold">
+          <a href="<%= favorita['link'] %>" class="text-blue-500 hover:underline" target="_blank"><%= favorita['titulo'] %></a>
+        </h3>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -35,7 +35,6 @@ end
 
 # URLs dos feeds RSS que você quer agregar
 FEEDS = {
-  'G1' => 'https://g1.globo.com/rss/g1/tecnologia/',
   'NoticiasAoMinuto' => 'https://www.noticiasaominuto.com.br/rss/tech',
   'Camara' => 'https://www.camara.leg.br/noticias/rss/dinamico/CIENCIA-E-TECNOLOGIA'
 }.freeze
