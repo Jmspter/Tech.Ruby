@@ -48,6 +48,7 @@ GEM
     sqlite3 (2.6.0-x86_64-linux-gnu)
     sqlite3 (2.6.0-x86_64-linux-musl)
     tilt (2.6.0)
+    will_paginate (4.0.1)
 
 PLATFORMS
   aarch64-linux-gnu
@@ -64,6 +65,7 @@ DEPENDENCIES
   rrs
   sinatra
   sqlite3
+  will_paginate
 
 BUNDLED WITH
    2.6.5

@@ -27,3 +27,8 @@
     </li>
   <% end %>
 </ul>
+
+<!-- Controles de Paginação -->
+  <div class="paginacao">
+    <%= will_paginate @noticias_paginadas, params: { fonte: @fonte } %>
+  </div>

@@ -4,6 +4,8 @@ require 'net/http'
 require 'sqlite3'
 require 'securerandom'
 require 'digest'
+require 'will_paginate'
+require 'will_paginate/array'
 
 # Habilita sessões
 enable :sessions
@@ -41,6 +43,10 @@ FEEDS = {
 
 # Rotas
 get '/' do
+  # Parâmetros de paginação
+  @pagina = (params[:page] || 1).to_i # 'page' é o parâmetro padrão do will_paginate
+  limite = 10 # Número de notícias por página
+
   # Parâmetros de filtro (se existirem)
   @fonte = params['fonte']
 
@@ -70,6 +76,9 @@ get '/' do
 
   # Ordena as notícias por data (mais recentes primeiro)
   @noticias.sort_by! { |noticia| noticia[:data] }.reverse!
+
+  # Paginação com will_paginate
+  @noticias_paginadas = @noticias.paginate(page: @pagina, per_page: limite)
 
   erb :index
 end
