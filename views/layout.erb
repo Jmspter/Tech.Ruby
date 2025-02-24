@@ -4,44 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agregador de Notícias</title>
-  <link rel="stylesheet" href="/styles.css">
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="../public/styles.css">
 </head>
-<body class="bg-gray-100 text-gray-900">
-  <div class="max-w-3xl mx-auto p-6">
-    <h1 class="text-3xl font-bold text-center mb-6">Agregador de Notícias</h1>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <h1>Agregador de Notícias</h1>
+    <nav>
+      <a href="/">Início</a>
+      <!-- Adicione mais links de navegação aqui, se necessário -->
+    </nav>
+  </header>
 
-    <form action="/" method="get" class="bg-white p-4 rounded-lg shadow-md space-y-4">
-      <div>
-        <label for="fonte" class="block text-sm font-medium text-gray-700">Filtrar por Fonte:</label>
-        <select name="fonte" id="fonte" class="w-full mt-1 p-2 border rounded-md">
-          <option value="">Todas</option>
-          <% FEEDS.keys.each do |fonte| %>
-            <option value="<%= fonte %>" <% if @fonte == fonte %>selected<% end %>><%= fonte %></option>
-          <% end %>
-        </select>
-      </div>
+  <!-- Conteúdo Principal -->
+  <main>
+    <%= yield %>
+  </main>
 
-      <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition">
-        Filtrar
-      </button>
-    </form>
-
-    <ul class="mt-6 space-y-4">
-      <% @noticias.each do |noticia| %>
-        <li class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
-          <h2 class="text-xl font-semibold text-blue-600 hover:underline">
-            <a href="<%= noticia[:link] %>"><%= noticia[:titulo] %></a>
-          </h2>
-          <p class="text-gray-700 mt-2 line-clamp-3"><%= noticia[:descricao] %></p>
-          <small class="text-gray-500 block mt-2">
-            <span class="font-medium">Fonte:</span> <%= noticia[:fonte] %> |
-            <span class="font-medium">Data:</span> <%= noticia[:data] %> |
-            <span class="font-medium">Categorias:</span> <%= noticia[:categorias].join(', ') %>
-          </small>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; <%= Time.now.year %> Agregador de Notícias. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>

@@ -1,11 +1,24 @@
-<ul class="max-w-2xl mx-auto space-y-4 p-4 bg-gray-100 rounded-lg shadow-md">
+<!-- Formulário de Filtros -->
+<form action="/" method="get">
+  <label for="fonte">Filtrar por Fonte:</label>
+  <select name="fonte" id="fonte">
+    <option value="">Todas</option>
+    <%= options_for_select(FEEDS.keys, @fonte) %>
+  </select>
+
+  <button type="submit">Filtrar</button>
+</form>
+
+<!-- Lista de Notícias -->
+<ul>
   <% @noticias.each do |noticia| %>
-    <li class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition">
-      <h2 class="text-xl font-semibold text-blue-600 hover:underline">
-        <a href="<%= noticia[:link] %>"><%= noticia[:titulo] %></a>
-      </h2>
-      <p class="text-gray-700 mt-2 line-clamp-3"><%= noticia[:descricao] %></p>
-      <small class="text-gray-500 block mt-2"><%= noticia[:data] %></small>
+    <li>
+      <h2><a href="<%= noticia[:link] %>"><%= noticia[:titulo] %></a></h2>
+      <p><%= noticia[:descricao] %></p>
+      <small>
+        Fonte: <%= noticia[:fonte] %> |
+        Data: <%= noticia[:data] %>
+      </small>
     </li>
   <% end %>
 </ul>
