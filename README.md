@@ -63,7 +63,6 @@ A aplicação fornece noticias sobre tecnologia e a opção para o usuario favor
 
 ## Licença
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-Descreva a licença do seu projeto, por exemplo:
 
 Este projeto é licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
 
