@@ -12,7 +12,13 @@
     <h1>Agregador de Notícias</h1>
     <nav>
       <a href="/">Início</a>
-      <!-- Adicione mais links de navegação aqui, se necessário -->
+      <% if usuario_logado? %>
+        <a href="/favoritas">Favoritas</a>
+        <a href="/logout">Sair</a>
+      <% else %>
+        <a href="/login">Entrar</a>
+        <a href="/registrar">Cadastrar</a>
+      <% end %>
     </nav>
   </header>
 

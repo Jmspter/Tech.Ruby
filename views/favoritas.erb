@@ -1,0 +1,8 @@
+<h2>Notícias Favoritas</h2>
+<ul>
+  <% @favoritas.each do |favorita| %>
+    <li>
+      <h3><a href="<%= favorita['link'] %>"><%= favorita['titulo'] %></a></h3>
+    </li>
+  <% end %>
+</ul>
